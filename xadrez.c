@@ -1,114 +1,131 @@
+
+// Nível Novato
+// Neste nível, o código utiliza loops para mover as peças de xadrez (Bispo, Torre, Rainha) conforme as direções especificadas.
+
+
 #include <stdio.h>
 
-// Função recursiva para movimentação do Bispo
-void movimento_bispo(int x, int y, int limite) {
-    if (x < 0 || x >= limite || y < 0 || y >= limite) return;
+// Constantes para os movimentos
+#define MOVIMENTOS_BISPO 5
+#define MOVIMENTOS_TORRE 5
+#define MOVIMENTOS_RAINHA 8
 
-    // Movimentação diagonal para cima e para a direita
-    printf("Bispo em: (%d, %d)\n", x, y);
-    movimento_bispo(x + 1, y + 1, limite);
-    movimento_bispo(x - 1, y - 1, limite);
-    
-    // Movimentação diagonal para cima e para a esquerda
-    printf("Bispo em: (%d, %d)\n", x, y);
-    movimento_bispo(x + 1, y - 1, limite);
-    movimento_bispo(x - 1, y + 1, limite);
-}
-
-// Função para movimentação da Torre
-void movimento_torre(int x, int y, int limite) {
-    // Movimentação para a direita
-    for (int i = y; i < limite; i++) {
-        printf("Torre em: (%d, %d)\n", x, i);
-    }
-    // Movimentação para a esquerda
-    for (int i = y; i >= 0; i--) {
-        printf("Torre em: (%d, %d)\n", x, i);
-    }
-    // Movimentação para cima
-    for (int i = x; i >= 0; i--) {
-        printf("Torre em: (%d, %d)\n", i, y);
-    }
-    // Movimentação para baixo
-    for (int i = x; i < limite; i++) {
-        printf("Torre em: (%d, %d)\n", i, y);
+void moverBispo() {
+    for (int i = 0; i < MOVIMENTOS_BISPO; i++) {
+        printf("Diagonal superior direita\n");
     }
 }
 
-// Função para movimentação da Rainha
-void movimento_rainha(int x, int y, int limite) {
-    // Movimentação para a direita
-    for (int i = y; i < limite; i++) {
-        printf("Rainha em: (%d, %d)\n", x, i);
-    }
-    // Movimentação para a esquerda
-    for (int i = y; i >= 0; i--) {
-        printf("Rainha em: (%d, %d)\n", x, i);
-    }
-    // Movimentação para cima
-    for (int i = x; i >= 0; i--) {
-        printf("Rainha em: (%d, %d)\n", i, y);
-    }
-    // Movimentação para baixo
-    for (int i = x; i < limite; i++) {
-        printf("Rainha em: (%d, %d)\n", i, y);
-    }
-    // Movimentação diagonal para cima e para a direita
-    for (int i = 1; i < limite; i++) {
-        if (x + i < limite && y + i < limite) {
-            printf("Rainha em: (%d, %d)\n", x + i, y + i);
-        }
-    }
-    // Movimentação diagonal para cima e para a esquerda
-    for (int i = 1; i < limite; i++) {
-        if (x + i < limite && y - i >= 0) {
-            printf("Rainha em: (%d, %d)\n", x + i, y - i);
-        }
-    }
-    // Movimentação diagonal para baixo e para a direita
-    for (int i = 1; i < limite; i++) {
-        if (x - i >= 0 && y + i < limite) {
-            printf("Rainha em: (%d, %d)\n", x - i, y + i);
-        }
-    }
-    // Movimentação diagonal para baixo e para a esquerda
-    for (int i = 1; i < limite; i++) {
-        if (x - i >= 0 && y - i >= 0) {
-            printf("Rainha em: (%d, %d)\n", x - i, y - i);
-        }
+void moverTorre() {
+    for (int i = 0; i < MOVIMENTOS_TORRE; i++) {
+        printf("Direita\n");
     }
 }
 
-// Função para movimentação do Cavalo (com loops aninhados)
-void movimento_cavalo(int x, int y, int limite) {
-    int movimentos[8][2] = {
-        {2, 1}, {2, -1}, {-2, 1}, {-2, -1},
-        {1, 2}, {1, -2}, {-1, 2}, {-1, -2}
-    };
-    for (int i = 0; i < 8; i++) {
-        int novo_x = x + movimentos[i][0];
-        int novo_y = y + movimentos[i][1];
-        if (novo_x >= 0 && novo_x < limite && novo_y >= 0 && novo_y < limite) {
-            printf("Cavalo em: (%d, %d)\n", novo_x, novo_y);
+void moverRainha() {
+    for (int i = 0; i < MOVIMENTOS_RAINHA; i++) {
+        printf("Esquerda\n");
+    }
+}
+
+int main() {
+    printf("Movimentação das peças no Xadrez:\n");
+
+    printf("\nMovendo o Bispo:\n");
+    moverBispo();
+
+    printf("\nMovendo a Torre:\n");
+    moverTorre();
+
+    printf("\nMovendo a Rainha:\n");
+    moverRainha();
+
+    return 0;
+}
+
+// Nível Aventureiro
+// Agora, para mover o cavalo em L, usaremos loops aninhados. O cavalo se move para baixo e à esquerda. A movimentação do cavalo será implementada com um for e um while.
+
+#include <stdio.h>
+
+void moverCavalo() {
+    for (int i = 0; i < 1; i++) { // Movimentação de 1 vez para o L
+        printf("Movendo para baixo e para a esquerda: ");
+        for (int j = 0; j < 2; j++) {
+            if (j == 0) {
+                printf("Baixo\n");
+            } else {
+                printf("Esquerda\n");
+            }
         }
     }
 }
 
 int main() {
-    int limite = 8;  // Tabuleiro 8x8
-    int x = 4, y = 4;  // Posição inicial do jogador
+    printf("Movimentação do Cavalo (L):\n");
+    moverCavalo();
+    return 0;
+}
 
-    printf("Movimentacao do Bispo:\n");
-    movimento_bispo(x, y, limite);
+//Nível Mestre
+// Para o nível mestre, modificaremos a movimentação do Bispo, Torre, Rainha e Cavalo usando recursão e loops aninhados com múltiplas variáveis ou condições.
 
-    printf("\nMovimentacao da Torre:\n");
-    movimento_torre(x, y, limite);
+#include <stdio.h>
 
-    printf("\nMovimentacao da Rainha:\n");
-    movimento_rainha(x, y, limite);
+// Constantes para os movimentos
+#define MOVIMENTOS_BISPO 5
+#define MOVIMENTOS_TORRE 5
+#define MOVIMENTOS_RAINHA 8
 
-    printf("\nMovimentacao do Cavalo:\n");
-    movimento_cavalo(x, y, limite);
+// Função recursiva para o movimento do Bispo
+void moverBispo(int movimentos) {
+    if (movimentos == 0) return;
+    printf("Diagonal superior direita\n");
+    moverBispo(movimentos - 1);
+}
+
+// Função recursiva para o movimento da Torre
+void moverTorre(int movimentos) {
+    if (movimentos == 0) return;
+    printf("Direita\n");
+    moverTorre(movimentos - 1);
+}
+
+// Função recursiva para o movimento da Rainha
+void moverRainha(int movimentos) {
+    if (movimentos == 0) return;
+    printf("Esquerda\n");
+    moverRainha(movimentos - 1);
+}
+
+// Função para mover o Cavalo com loops aninhados
+void moverCavalo() {
+    for (int i = 0; i < 1; i++) { // Movimenta uma vez em L
+        printf("Movendo para baixo e para a esquerda: ");
+        for (int j = 0; j < 2; j++) {
+            if (j == 0) {
+                printf("Baixo\n");
+            } else {
+                printf("Esquerda\n");
+            }
+        }
+    }
+}
+
+int main() {
+    printf("Movimentação das peças no Xadrez (Recursivo e Aninhado):\n");
+
+    printf("\nMovendo o Bispo:\n");
+    moverBispo(MOVIMENTOS_BISPO);
+
+    printf("\nMovendo a Torre:\n");
+    moverTorre(MOVIMENTOS_TORRE);
+
+    printf("\nMovendo a Rainha:\n");
+    moverRainha(MOVIMENTOS_RAINHA);
+
+    printf("\nMovendo o Cavalo (L):\n");
+    moverCavalo();
 
     return 0;
 }
